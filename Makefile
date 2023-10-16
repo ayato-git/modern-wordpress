@@ -10,6 +10,10 @@ build:
 up:
 	docker-compose up
 
+.PHONY: deploy
+help:
+	fly deploy --nixpacks
+
 .PHONY: help
 help:
 	cat Makefile
