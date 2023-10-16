@@ -1,0 +1,25 @@
+services:
+  db:
+    image: mysql:8
+    container_name: mysql
+    env_file: .env.local
+    ports:
+      - 3030
+    volumes:
+      - data:/var/lib/mysql
+
+  bedrock:
+    image: bedrock
+    container_name: bedrock
+    links:
+      - db
+    ports:
+      - 80:80
+    env_file: .env.local
+    volumes:
+      - ./:/bedrock
+    depends_on:
+      db:
+        condition: service_started
+volumes:
+  data:
